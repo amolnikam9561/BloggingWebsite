@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Register</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #0F2027;
+            background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+            background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+            color: #E8E8E8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #1C2833;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            color: #00C853;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 0.95rem;
+            color: #ABB2B9;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="submit"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #4A6572;
+            background: #283747;
+            color: #E8E8E8;
+            font-size: 1rem;
+        }
+
+        input[type="submit"] {
+            border: none;
+            background: #00C853;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: #00E676;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .link a {
+            color: #29B6F6;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Register</h1>
+        <form>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <input type="submit" formaction="/userregistration">
+        </form>
+        <div class="link">
+            <a href="/givemeuserlogin">Already have an account? Login</a>
+        </div>
+    </div>
+</body>
+</html>

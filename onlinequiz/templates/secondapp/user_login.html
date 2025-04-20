@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #0F2027;
+            background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+            background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+            color: #E8E8E8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #1C2833;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            color: #29B6F6;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 0.95rem;
+            color: #ABB2B9;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="submit"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #4A6572;
+            background: #283747;
+            color: #E8E8E8;
+            font-size: 1rem;
+        }
+
+        #username {
+            background: #34495E; /* Unique background color for the username field */
+            color: #E0E0E0;      /* Lighter text for better contrast */
+            font-size: 1rem;     /* Maintain uniform text size */
+            padding: 12px;       /* Slightly larger padding */
+            border-radius: 8px;  /* Rounded corners for a softer appearance */
+            border: 1px solid #4A6572; /* Border to maintain consistency */
+        }
+
+        #username:focus {
+            outline: none;       /* Remove default focus outline */
+            border: 2px solid #29B6F6; /* Add a distinct focus border */
+            box-shadow: 0 0 8px rgba(41, 182, 246, 0.6); /* Subtle glowing effect */
+        }
+
+        input[type="submit"] {
+            border: none;
+            background: #29B6F6;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: #4FC3F7;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .link a {
+            color: #00C853;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Login</h1>
+        <form>
+            <label for="username">Username</label>
+            <input type="username" id="username" name="username" placeholder="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <input type="submit" formaction="/userlogin">
+        </form>
+        <div class="link">
+            <a href="/givemeuserregister">Don't have an account? Register</a><br><br>
+            
+            {{error}}
+            {{message}}
+        </div>
+    </div>
+</body>
+</html>

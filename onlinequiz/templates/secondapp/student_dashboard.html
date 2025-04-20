@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0F2027;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            width: 100%;
+            background: linear-gradient(90deg, #4CAF50, #FF9800, #F44336);
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+        }
+
+        nav a {
+            color: #FFFFFF;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 20px;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .buttons-container button {
+            background: linear-gradient(90deg, #4CAF50, #FF9800);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .buttons-container button:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(90deg, #FF9800, #4CAF50);
+        }
+
+        .main-section {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .dashboard {
+            flex: 2;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: #1A1A2E;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .leaderboard {
+            flex: 1;
+            background: #1A1A2E;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        .leaderboard h3 {
+            margin-bottom: 10px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        .leaderboard table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard th, .leaderboard td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .leaderboard th {
+            background: #4CAF50;
+            color: #FFFFFF;
+        }
+
+        .leaderboard tr:nth-child(even) {
+            background: #2A2A3E;
+        }
+
+        .leaderboard tr:hover {
+            background: #4CAF50;
+        }
+
+        .performance-reports {
+            width: 100%;
+            background: #1A1A2E;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .performance-reports h3 {
+            margin-bottom: 10px;
+            border-bottom: 2px solid #FF9800;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Profile</a>
+        <a href="#">Leaderboard</a>
+        <a href="#">Reports</a>
+        <a href="#">Logout</a>
+    </nav>
+
+    <div class="container">
+        <div class="buttons-container">
+            <button>Python</button>
+            <button>DSA</button>
+            <button>OOP</button>
+            <button>SE</button>
+            <button>DBMS</button>
+            <button>Web Dev</button>
+            <button>OS</button>
+            <button>ML</button>
+            <button>Data Science</button>
+            <button>Cloud</button>
+            <button>Distributed Sys</button>
+            <button>Blockchain</button>
+        </div>
+
+        <div class="main-section">
+            <div class="dashboard">
+                <div class="card">Test Attempted</div>
+                <div class="card">Your Good Score</div>
+                <div class="card">Failed Attempt</div>
+                <div class="card">Timeline</div>
+                <div class="card">Total Topics Covered</div>
+                <div class="card">Profile</div>
+            </div>
+
+            <div class="leaderboard">
+                <h3>Leaderboard</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Student</th>
+                            <th>Subject</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Alice</td>
+                            <td>Math</td>
+                            <td>95%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Bob</td>
+                            <td>Science</td>
+                            <td>89%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Charlie</td>
+                            <td>English</td>
+                            <td>76%</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Diana</td>
+                            <td>History</td>
+                            <td>82%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="performance-reports">
+            <h3>Performance Reports</h3>
+            <p>Track your progress and identify areas for improvement!</p>
+        </div>
+    </div>
+</body>
+</html>

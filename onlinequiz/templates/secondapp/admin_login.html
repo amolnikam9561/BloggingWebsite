@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #1F1C2C;
+            background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+            background: linear-gradient(to right, #928DAB, #1F1C2C);
+            color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            background: #2C2A33;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        h1 {
+            text-align: center;
+            color: #FFD700;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #CCCCCC;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            background: #3E4052;
+            color: #FFFFFF;
+        }
+
+        #admin-username {
+            background: #444457; /* Unique background color */
+            color: #E0E0E0;      /* Slightly lighter text color */
+            font-weight: bold;   /* Bold font for emphasis */
+            padding: 14px;       /* Slightly more padding for distinction */
+            border-radius: 10px; /* More rounded corners */
+        }
+
+        #admin-username:focus {
+            border: 2px solid #FF6347; /* Distinct focus border color */
+        }
+
+        input[type="password"]:focus {
+            outline: none;
+            border: 2px solid #FFD700;
+        }
+
+        input[type="submit"] {
+            background: #FFD700;
+            color: #1F1C2C;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: #FFEA85;
+            transform: translateY(-2px);
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .link a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Admin Login</h1>
+        <form>
+            <label for="admin-username">Admin Username</label>
+            <input type="text" id="admin-username" name="username" placeholder="Enter admin username" required>
+
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" name="password" placeholder="Enter admin password" required>
+
+            <input type="submit" formaction="/adminlogin">
+        </form>
+    </div>
+</body>
+</html>

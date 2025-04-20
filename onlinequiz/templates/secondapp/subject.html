@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Subject and Topic</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0F2027;
+            background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+            background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+            color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .selection-container {
+            background: #1A1A2E;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+        }
+
+        .selection-container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #4CAF50, #FF9800, #F44336);
+            animation: animate-bar 3s linear infinite;
+        }
+
+        @keyframes animate-bar {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 100% 0;
+            }
+        }
+
+        .selection-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #00FFAB;
+        }
+
+        .form-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        label {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: none;
+            background: #2E2E4E;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        select:hover {
+            background: #00FFAB;
+            color: #1A1A2E;
+        }
+
+        .action-buttons {
+            margin-top: 30px;
+        }
+
+        .action-buttons input[type="submit"] {
+            width: 40%;
+            padding: 12px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00FFAB, #4CAF50);
+            color: #1A1A2E;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-buttons input[type="submit"]:hover {
+            background: linear-gradient(90deg, #4CAF50, #00FFAB);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 171, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="selection-container">
+        <div class="selection-header">Select Subject and Topic</div>
+        <form>
+            <div class="form-group">
+                <label for="subject">Select Subject:</label>
+                <select id="subject" name="subject">
+                    <option value="Select a Subject" disabled>Select a Subject</option>
+                    <option value="Python">Python</option>
+                    <option value="DSA">Data Structures and Algorithms</option>
+                    <option value="OOP">Object Oriented Programming</option>
+                    <option value="Software Engineering">Software Engineering</option>
+                    <option value="DBMS">Database Management System</option>
+                    <option value="Web Dev">Web Development</option>
+                    <option value="Operating Systems">Operating Systems</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Cloud Computing">Cloud Computing</option>
+                    <option value="Distributed Systems">Distributed Systems</option>
+                    <option value="BlockChain Tech">Blockchain Technology</option>
+                </select>
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="topic">Select Topic:</label>
+                <select id="topic" name="topic">
+                    <option value="algebra">Algebra</option>
+                    <option value="physics">Physics</option>
+                    <option value="grammar">Grammar</option>
+                    <option value="world_history">World History</option>
+                </select>
+            </div> -->
+
+            <div class="action-buttons">
+                <input type="submit" value="Start Exam" formaction="/starttest">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

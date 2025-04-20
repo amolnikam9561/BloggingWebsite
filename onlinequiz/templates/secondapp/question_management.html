@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Management</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #0F2027; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+            background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+            color: #E8E8E8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background: #1C2833;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 800px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        form label {
+            font-size: 0.95rem;
+            color: #ABB2B9;
+            margin-bottom: 5px;
+        }
+
+        form input[type="text"], form select {
+
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #4A6572;
+            border-radius: 5px;
+            background: #283747;
+            color: #E8E8E8;
+            font-size: 0.95rem;
+            
+        }
+
+        form input[type="text"]::placeholder {
+            color: #ABB2B9;
+        }
+
+        form input[type="submit"] {
+            grid-column: span 1;
+            padding: 10px;
+            font-size: 0.9rem;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            text-align: center;
+        }
+
+        form input[value="Add Question"] {
+            background: #00C853;
+        }
+
+        form input[value="Add Question"]:hover {
+            background: #00E676;
+        }
+
+        form input[value="View Questions"] {
+            background: #29B6F6;
+        }
+
+        form input[value="View Questions"]:hover {
+            background: #4FC3F7;
+        }
+
+        form input[value="Update Questions"] {
+            background: #FBC02D;
+        }
+
+        form input[value="Update Questions"]:hover {
+            background: #FFEB3B;
+        }
+
+        form input[value="Delete Questions"] {
+            background: #D32F2F;
+        }
+
+        form input[value="Delete Questions"]:hover {
+            background: #F44336;
+        }
+
+        span {
+            display: block;
+            grid-column: span 2;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #FF5252;
+            text-align: center;
+        }
+
+        form select {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label>Enter a Question Number</label>
+        <input type="text" name="qno" placeholder="Enter Question Number" value="{{question.qno}}">
+
+        <label>Enter a Question</label>
+        <input type="text" name="qtext" placeholder="Enter Question" value="{{question.qtext}}">
+
+        <label>Enter an Answer</label>
+        <input type="text" name="answer" placeholder="Enter Answer" value="{{question.answer}}">
+
+        <label>Enter Option 1</label>
+        <input type="text" name="op1" placeholder="Enter option 1" value="{{question.op1}}">
+
+        <label>Enter Option 2</label>
+        <input type="text" name="op2" placeholder="Enter option 2" value="{{question.op2}}">
+
+        <label>Enter Option 3</label>
+        <input type="text" name="op3" placeholder="Enter option 3" value="{{question.op3}}">
+
+        <label>Enter Option 4</label>
+        <input type="text" name="op4" placeholder="Enter option 4" value="{{question.op4}}">
+
+        <label>Enter Subject</label>
+        <select name="subject">
+            <option value="" disabled selected>Select Subject</option>
+            <option value="Python">Python</option>
+            <option value="DSA">Data structures and Algorithm</option>
+            <option value="OOP">Object Oriented Programming</option>
+            <option value="Software Engineering">Software Engineering</option>
+            <option value="DBMS">Database Management System</option>
+            <option value="Web Dev">Web Development</option>
+            <option value="Operating Systems">Operating Systems</option>
+            <option value="Machine Learning">Machine Learning</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Cloud Computing">Cloud Computing</option>
+            <option value="Distributed Systems">Distributed Systems</option>
+            <option value="BlockChain Tech">Blockchain Technology</option>
+        </select>
+
+        <input type="submit" value="Add Question" formaction="/addQuestion">
+        <input type="submit" value="View Questions" formaction="/viewQuestion">
+        <input type="submit" value="Update Questions" formaction="/updateQuestion">
+        <input type="submit" value="Delete Questions" formaction="/deleteQuestion">
+
+        <span>{{message}}</span>
+    </form>
+</body>
+</html>

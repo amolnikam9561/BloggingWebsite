@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1f1f1f;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+        header h1 {
+            color: #00d1ff;
+            margin: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #1e1e1e;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+        th {
+            background-color: #2a2a2a;
+            color: #00d1ff;
+        }
+        tr:hover {
+            background-color: #333;
+        }
+        .actions button {
+            background-color: #00d1ff;
+            color: #121212;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .actions button:hover {
+            background-color: #0077b3;
+        }
+        .add-user {
+            display: block;
+            margin: 20px 0;
+            background-color: #00d1ff;
+            color: #121212;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .add-user:hover {
+            background-color: #0077b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Access Management</h1>
+    </header>
+    <div class="container">
+        <a href="#" class="add-user">Add New User</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Age</th>
+                    <th>Major Skill</th>
+                    <th>City</th>
+                    <th>Designation</th>
+                    <th>Password</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example row (to be dynamically populated)
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>john_doe</td>
+                    <td>30</td>
+                    <td>Python</td>
+                    <td>New York</td>
+                    <td>Developer</td>
+                    <td>password123</td>
+                    <td class="actions">
+                        <button onclick="updateUser(1)">Update</button>
+                        <button onclick="deleteUser(1)">Delete</button>
+                    </td>
+                </tr> -->
+                <!-- Add rows dynamically from the database -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

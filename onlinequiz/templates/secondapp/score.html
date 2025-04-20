@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Score</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #0F2027;
+            background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+            background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .score-container {
+            background: #1A1A2E;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            position: relative;
+            width: 70%;
+        }
+
+        .score-header {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #00FFAB;
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #000;
+            background: linear-gradient(90deg, #4CAF50, #00FFAB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: neon-glow 2s infinite alternate;
+        }
+
+        @keyframes neon-glow {
+            0% {
+                text-shadow: 0 0 10px #4CAF50, 0 0 20px #00FFAB, 0 0 30px #4CAF50;
+            }
+            100% {
+                text-shadow: 0 0 20px #00FFAB, 0 0 30px #4CAF50, 0 0 40px #00FFAB;
+            }
+        }
+
+        .score-message {
+            font-size: 1.2rem;
+            color: #FFFFFF;
+        }
+
+        .table-container {
+            margin-top: 30px;
+            max-height: 300px;
+            overflow-y: auto;
+            background: #1A1A2E;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #FFFFFF;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #283747;
+        }
+
+        th {
+            background: #283747;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        tr:hover {
+            background: #34495E;
+        }
+
+        .action-buttons {
+            margin-top: 30px;
+        }
+
+        .action-buttons input[type="button"] {
+            width: 40%;
+            padding: 12px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00FFAB, #4CAF50);
+            color: #1A1A2E;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-buttons input[type="button"]:hover {
+            background: linear-gradient(90deg, #4CAF50, #00FFAB);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 171, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="score-container">
+        <div class="score-header">Your Score</div>
+        <div class="score-value">{{score}}</div>
+        <div class="score-message">Congratulations! Check out your answers below.</div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Question</th>
+                    <th>Correct Answer</th>
+                    <th>Your Answer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in responses %}
+                <tr>
+                    <td>{{list.0}}</td>
+                    <td>{{list.1}}</td>
+                    <td>{{list.2}}</td>
+                    <td>{{list.3}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="action-buttons">
+        <input type="button" value="Retry" formaction="/">
+        <input type="button" value="Exit" formaction="/student_dashboard">
+    </div>
+</body>
+</html>

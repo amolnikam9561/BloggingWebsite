@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Page - The Debugger's Journal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    {% load static%}
+    <style>
+        body {
+            background: #1e293b ;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links li a {
+  position: relative;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 0;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #29b6f6;
+}
+
+.nav-links li a:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: #29b6f6;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+
+.nav-links li a:hover:before {
+  width: 100%;
+}
+
+.nav-links li.center a:before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-links li.upward a:before {
+  width: 100%;
+  bottom: -5px;
+  opacity: 0;
+}
+
+.nav-links li.upward a:hover:before {
+  bottom: 0px;
+  opacity: 1;
+}
+
+.nav-links li.forward a:before {
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+.nav-links li.forward a:hover:before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+/* General Container Styling */
+.d-flex {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between input and button */
+}
+
+/* Input Field Styling */
+.d-flex .form-control {
+    background-color: #000;
+    color: #29b6f6;
+    border: 1px solid #29b6f6;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: cursive, sans-serif;
+    box-shadow: inset 0 0 8px #29b6f6;
+    transition: all 0.3s ease;
+}
+
+.d-flex .form-control::placeholder {
+    color: #29b6f6;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+.d-flex .form-control:focus {
+    outline: none;
+    border-color: #29b6f6;
+    box-shadow: 0 0 12px #29b6f6, inset 0 0 12px #29b6f6;
+    background-color: #1a1a2e;
+}
+
+/* Button Styling */
+.d-flex .btn {
+    background-color: #29b6f6;
+    color: #000; /* Text inside button is black */
+    font-family: cursive, sans-serif;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 0 8px #29b6f6;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s ease;
+    text-decoration: none; /* Remove underline */
+}
+
+.d-flex .btn a {
+    color: inherit; /* Match the text color to button color */
+    text-decoration: none; /* Remove underline from the link */
+}
+
+.d-flex .btn:hover {
+    background-color: #000;
+    color: #29b6f6; /* Change text color on hover */
+    text-shadow: 0 0 8px #29b6f6;
+    box-shadow: 0 0 15px #29b6f6;
+    transform: scale(1.05);
+}
+
+/* Button Techy Effect */
+.d-flex .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    transform: skewX(-45deg);
+    transition: all 0.5s ease;
+    z-index: -1;
+}
+
+.d-flex .btn:hover::before {
+    left: 100%;
+}
+
+
+        .main-content {
+            display: flex;
+            margin: 20px;
+        }
+
+        .blog-cards {
+            flex: 3;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .blog-card {
+            background-color: #1e293b;
+            border: 1px solid #29b6f6;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 255, 204, 0.7);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 1px solid #29b6f6;
+            margin-bottom: 15px;
+        }
+
+        .blog-card h3 {
+            margin-top: 0;
+            color: #29b6f6;
+        }
+
+        .blog-card p {
+            color: #fff;
+        }
+
+        .sidebar {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #1e293b;
+            border: 1px solid #29b6f6;
+            border-radius: 10px;
+        }
+
+        .section h3 {
+            margin-top: 0;
+            color: #29b6f6;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section ul li {
+            margin: 10px 0;
+        }
+
+        .section ul li a {
+            color: #29b6f6;
+            text-decoration: none;
+        }
+
+        .section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            color: #fff;
+            background-color: #1e293b;
+            padding: 10px 15px;
+            text-decoration: none;
+            border: 1px solid #29b6f6;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination a:hover {
+            background-color: #29b6f6;
+            color: #000;
+        }
+
+        footer{
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  background: #000;
+}
+footer .content{
+  max-width: 1350px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+footer .content p,a{
+  color: #fff;
+}
+footer .content .box{
+  width: 33%;
+  transition: all 0.4s ease;
+}
+footer .content .topic{
+  font-size: 22px;
+  font-weight: 600;
+  color: #00ffcc;
+  margin-bottom: 16px;
+}
+footer .content p{
+  text-align: justify;
+}
+footer .content .lower .topic{
+  margin: 24px 0 5px 0;
+}
+footer .content .lower i{
+  padding-right: 16px;
+}
+footer .content .middle{
+  padding-left: 80px;
+}
+footer .content .middle a{
+  line-height: 32px;
+}
+footer .content .right input[type="text"]{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  color: #d9d9d9;
+  background: #000;
+  border-radius: 5px;
+  padding-left: 10px;
+  font-size: 17px;
+  border: 2px solid #222;
+}
+footer .content .right input[type="submit"]{
+  height: 42px;
+  width: 100%;
+  font-size: 18px;
+  color: #fff;
+  background: #000;
+  outline: none;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 12px;
+  border: 2px solid #00ffcc;
+  transition: all 0.3s ease-in-out;
+}
+.content .right input[type="submit"]:hover{
+  background: none;
+  color:  #00ffcc;
+}
+.icons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  
+}
+.icons a{
+  margin: 0 25px;
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+.icons a .layer{
+  width: 55px;
+  height: 55px;
+  transition: transform 0.3s;
+}
+.icons a:hover .layer{
+  transform: rotate(-35deg) skew(20deg);
+}
+.icons a .layer span{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.icons a .layer span.fab{
+  font-size: 30px;
+  line-height: 55px;
+  text-align: center;
+}
+.icons a:hover .layer span:nth-child(1){
+  opacity: 0.2;
+}
+.icons a:hover .layer span:nth-child(2){
+  opacity: 0.4;
+  transform: translate(5px, -5px);
+}
+.icons a:hover .layer span:nth-child(3){
+  opacity: 0.6;
+  transform: translate(10px, -10px);
+}
+.icons a:hover .layer span:nth-child(4){
+  opacity: 0.8;
+  transform: translate(15px, -15px);
+}
+.icons a:hover .layer span:nth-child(5){
+  opacity: 1;
+  transform: translate(20px, -20px);
+}
+.icons a:nth-child(1) .layer span,
+.icons a:nth-child(1) .text{
+  color: #4267B2;
+  border-color: #4267B2;
+}
+.icons a:nth-child(2) .layer span,
+.icons a:nth-child(2) .text{
+  color: #1DA1F2;
+  border-color: #1DA1F2;
+}
+.icons a:nth-child(3) .layer span,
+.icons a:nth-child(3) .text{
+  color: #E1306C;
+  border-color: #E1306C;
+}
+.icons a:nth-child(4) .layer span,
+.icons a:nth-child(4) .text{
+  color: #2867B2;
+  border-color: #2867B2;
+}
+.icons a:nth-child(5) .layer span,
+.icons a:nth-child(5) .text{
+  color: #ff0000;
+  border-color: #ff0000;
+}
+.icons a:hover:nth-child(1) .layer span{
+  box-shadow: -1px 1px 3px #4267B2;
+}
+.icons a:hover:nth-child(2) .layer span{
+  box-shadow: -1px 1px 3px #1DA1F2;
+}
+.icons a:hover:nth-child(3) .layer span{
+  box-shadow: -1px 1px 3px #E1306C;
+}
+.icons a:hover:nth-child(4) .layer span{
+  box-shadow: -1px 1px 3px #2867B2;
+}
+.icons a:hover:nth-child(5) .layer span{
+  box-shadow: -1px 1px 3px #ff0000;
+}
+.icons a .text{
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  opacity: 0;
+  font-weight: 500;
+  transform: translateX(-50%);
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+}
+.icons a:hover .text{
+  bottom: -35px;
+  opacity: 1;
+}
+footer .bottom{
+  width: 100%;
+  text-align: center;
+  color: #d9d9d9;
+  padding: 0 40px 5px 0;
+}
+footer .bottom a{
+  color: #00ffcc;
+}
+footer a{
+  transition: all 0.3s ease;
+}
+footer a:hover{
+  color: #00ffcc;
+}
+@media (max-width:1100px) {
+  footer .content .middle{
+    padding-left: 50px;
+  }
+}
+@media (max-width:950px){
+  footer .content .box{
+    width: 50%;
+  }
+  .content .right{
+    margin-top: 40px;
+  }
+}
+@media (max-width:560px){
+  footer{
+    position: relative;
+  }
+  footer .content .box{
+    width: 100%;
+    margin-top: 30px;
+  }
+  footer .content .middle{
+    padding-left: 0;
+  }
+}
+
+    </style>
+</head>
+<body>
+  <section>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm" style="background: #000; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);">
+      <div class="container-fluid d-flex align-items-center justify-content-between">
+        <!-- Logo or Title -->
+        <span class="navbar-brand" style="font-family: cursive, sans-serif; color: #29b6f6; text-shadow: 0 0 8px #29b6f6, 0 0 12px #00b3cc;">
+          <img src="{% static 'images/logotdb.png' %}" alt="Logo TDB" height="80px">
+        </span>
+    
+        <!-- Navbar Links with Hover Animation -->
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li class="forward"><a href="/blogpage">Blogs</a></li>
+          <li class="center"><a href="#">About</a></li>
+          <li class="upward"><a href="#">Contact</a></li>
+          <li class="forward"><a href='/givemeuserlogin'>Online Quiz</a></li>
+          
+        </ul>
+    
+        <!-- Search Box -->
+        <form class="d-flex search-form" role="search">
+          <input class="form-control search-input me-2" type="search" placeholder="Search Here" aria-label="Search">
+          <button class="btn search-btn" type="submit">Search</button>
+        </form>
+
+        <!-- Login and Sign Up Buttons -->
+        <div class="d-flex button-container">
+          <button class="btn login-btn me-2"><a href="/givemelogin">Login</a></button>
+          <button class="btn signup-btn"><a href="/givemeregister">Sign Up</a></button>
+        </div>
+
+    </nav>
+  </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Blog Cards -->
+        <div class="blog-cards">
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Understanding AI Models</h3>
+                <p>Explore how AI models transform raw data into valuable insights.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Debugging Tips for Developers</h3>
+                <p>Master the art of debugging with these essential tips.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Cloud Computing Simplified</h3>
+                <p>Discover the basics of cloud computing and its significance.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Programming Best Practices</h3>
+                <p>Write efficient and clean code using best practices.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Advancements in AI</h3>
+                <p>Stay updated on the latest trends in artificial intelligence.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Cybersecurity Essentials</h3>
+                <p>Learn the basics of protecting your digital identity.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Machine Learning Models</h3>
+                <p>An introduction to various machine learning techniques.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Data Science Simplified</h3>
+                <p>Learn the core concepts of data science in simple terms.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Innovations in Technology</h3>
+                <p>Discover the latest breakthroughs in technology.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Web Development Basics</h3>
+                <p>Learn how to build your first web page.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://via.placeholder.com/300x150" alt="Blog Image">
+                <h3>Top Programming Languages</h3>
+                <p>Find out which programming languages are in demand.</p>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="section">
+                <h3>Recent Posts</h3>
+                <ul>
+                    <li><a href="#">Post 1</a></li>
+                    <li><a href="#">Post 2</a></li>
+                    <li><a href="#">Post 3</a></li>
+                </ul>
+            </div>
+            <div class="section">
+                <h3>Featured Posts</h3>
+                <ul>
+                    <li><a href="#">Featured 1</a></li>
+                    <li><a href="#">Featured 2</a></li>
+                    <li><a href="#">Featured 3</a></li>
+                </ul>
+            </div>
+            <div class="section">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Artificial Intelligence</a></li>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">Cybersecurity</a></li>
+                    <li><a href="#">Cloud Computing</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <ul class="pagination">
+        <li><a href="#">&#171; Prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">Next &#187;</a></li>
+    </ul>
+
+    <section>
+        <footer>
+          <br>
+          <br>
+          <br>
+          <div class="topic" style="text-align: center;"><h2>Follow Us On:</h2></div>
+          <br>
+          <div class="icons" style="text-align: center;">
+            <a href="#">
+               <div class="layer">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span class="fab fa-facebook-f"></span>
+               </div>
+               <div class="text">
+                  Facebook
+               </div>
+            </a>
+            <a href="#">
+               <div class="layer">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span class="fab fa-twitter"></span>
+               </div>
+               <div class="text">
+                  Twitter
+               </div>
+            </a>
+            <a href="#">
+               <div class="layer">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span class="fab fa-instagram"></span>
+               </div>
+               <div class="text">
+                  Instagram
+               </div>
+            </a>
+            <a href="#">
+               <div class="layer">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span class="fab fa-linkedin-in"></span>
+               </div>
+               <div class="text">
+                  Linkedin
+               </div>
+            </a>
+            <a href="#">
+               <div class="layer">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span class="fab fa-youtube"></span>
+               </div>
+               <div class="text">
+                  YouTube
+               </div>
+            </a>
+         </div>
+         <br><br><br>
+          <div class="content">
+            <div class="left box">
+              <div class="upper">
+                <div class="topic">About us</div>
+                <p>Welcome to our platform! We are dedicated to providing the best experience for our users. Our team works tirelessly to create solutions that cater to your needs and deliver exceptional value.</p>
+              </div>
+              <div class="lower">
+                <div class="topic">Contact us</div>
+                <div class="phone">
+                  <a href="#"><i class="fas fa-phone-volume"></i>+91 9561058903</a>
+                </div>
+                <div class="email">
+                  <a href="#"><i class="fas fa-envelope"></i>amolnikam9561@gmail.com</a>
+                </div>
+              </div>
+            </div>
+            <div class="middle box">
+              <div class="topic">Our Services</div>
+              <div><a href="#">Web Design, Development</a></div>
+              <div><a href="#">Data Analytics</a></div>
+              <div><a href="#">Business Intelligance</a></div>
+              <div><a href="#">Full Stack Web Development</a></div>
+            </div>
+            <div class="right box">
+              <div class="topic">Subscribe us</div>
+              <form action="#">
+                <input type="text" placeholder="Enter email address">
+                <input type="submit" name="" value="Send">
+                <br><br>
+              </form>
+            </div>
+          </div>
+          <br><br><br>
+          <div class="bottom">
+            <p>Copyright © 2024 <a href="#">TheDebuggersJournal</a> All rights reserved</p>
+          </div>
+        </footer>
+      </section>
+    
+</body>
+</html>
+

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #31314a);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #00ffff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px #00ffff, 0 0 12px #00b3cc;
+        }
+
+        form {
+            background: rgba(50, 50, 70, 0.9);
+            border: 2px solid #00ffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            animation: glow 2s infinite;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background: #00ffff;
+            color: #1e1e2f;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background: #1e1e2f;
+            color: #00ffff;
+            transform: scale(1.05);
+        }
+
+        .links {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .links a {
+            color: #00ffcc;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease, transform 0.2s;
+        }
+
+        .links a:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        span {
+            display: block;
+            margin-top: 20px;
+            color: #00ff99;
+            font-size: 14px;
+        }
+
+        /* Adding animated glowing effect */
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff; }
+            50% { box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff; }
+            100% { box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome to Tech Portal</h1>
+        <p>Please log in to access your account.</p>
+        <form>
+            <label>Enter your username</label>
+            <input type="text" placeholder="Enter your username" name="username">
+
+            <label>Enter your password</label>
+            <input type="password" placeholder="Enter your password" name="password">
+            
+            <input type="submit" value="Login" formaction="/login">
+            <input type="submit" value="SignUp" formaction="/givemeregister">
+
+        </form>
+        <div class="links">
+            <a href="forgot-password.html">Forgot Password?</a>
+            <!-- <a href="sign-up.html">Sign Up</a> -->
+        </div>
+        <span>{{message}}</span>
+    </div>
+
+</body>
+</html>

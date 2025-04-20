@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e2f;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #29b6f6;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #24243e, #141428);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 -4px 8px rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            flex: 1 1 calc(33% - 40px);
+            max-width: calc(33% - 40px);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6), 0 -6px 12px rgba(255, 255, 255, 0.1);
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #29b6f6;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .card p {
+            line-height: 1.6;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .card a:hover {
+            background: linear-gradient(90deg, #0056b3, #007bff);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <div class="dashboard">
+        <!-- Question Management Card -->
+        <div class="card">
+            <h2>Question Management</h2>
+            <p>Manage, add, edit, or delete quiz questions for different topics.</p>
+            <a href="/question_management">Manage Questions</a>
+        </div>
+
+        <!-- Student Results Display Card -->
+        <div class="card">
+            <h2>Student Results Display</h2>
+            <p>View detailed results and performance analysis of students.</p>
+            <a href="/student_results">View Results</a>
+        </div>
+
+        <!-- Analytics Overview Card -->
+        <div class="card">
+            <h2>Analytics Overview</h2>
+            <p>Analyze overall system performance and user engagement.</p>
+            <a href="/admin/analytics">View Analytics</a>
+        </div>
+
+        <!-- New Card: System Logs -->
+        <div class="card">
+            <h2>System Logs</h2>
+            <p>Monitor and review detailed logs for troubleshooting and auditing.</p>
+            <a href="/admin/logs">View Logs</a>
+        </div>
+
+        <!-- New Card: User Management -->
+        <div class="card">
+            <h2>User Management</h2>
+            <p>Manage user accounts, roles, and permissions efficiently.</p>
+            <a href="/admin/user-management">Manage Users</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blogging Website</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Add Font Awesome for social media icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  {% load static%}
+  <link rel="stylesheet" href="{% static 'css/home.css'%}">
+</head>
+<style>
+  
+body {
+    background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    font-family: cursive;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links li a {
+  position: relative;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 0;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #29b6f6;
+}
+
+.nav-links li a:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: #29b6f6;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+
+.nav-links li a:hover:before {
+  width: 100%;
+}
+
+.nav-links li.center a:before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-links li.upward a:before {
+  width: 100%;
+  bottom: -5px;
+  opacity: 0;
+}
+
+.nav-links li.upward a:hover:before {
+  bottom: 0px;
+  opacity: 1;
+}
+
+.nav-links li.forward a:before {
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+.nav-links li.forward a:hover:before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+/* General Container Styling */
+.d-flex {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between input and button */
+}
+
+/* Input Field Styling */
+.d-flex .form-control {
+    background-color: #000;
+    color: #29b6f6;
+    border: 1px solid #29b6f6;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: cursive, sans-serif;
+    box-shadow: inset 0 0 8px #29b6f6;
+    transition: all 0.3s ease;
+}
+
+.d-flex .form-control::placeholder {
+    color: #29b6f6;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+.d-flex .form-control:focus {
+    outline: none;
+    border-color: #29b6f6;
+    box-shadow: 0 0 12px #29b6f6, inset 0 0 12px #29b6f6;
+    background-color: #1a1a2e;
+}
+
+/* Button Styling */
+.d-flex .btn {
+    background-color: #29b6f6;
+    color: #000; /* Text inside button is black */
+    font-family: cursive, sans-serif;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 0 8px #29b6f6;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s ease;
+    text-decoration: none; /* Remove underline */
+}
+
+.d-flex .btn a {
+    color: inherit; /* Match the text color to button color */
+    text-decoration: none; /* Remove underline from the link */
+}
+
+.d-flex .btn:hover {
+    background-color: #000;
+    color: #29b6f6; /* Change text color on hover */
+    text-shadow: 0 0 8px #29b6f6;
+    box-shadow: 0 0 15px #29b6f6;
+    transform: scale(1.05);
+}
+
+/* Button Techy Effect */
+.d-flex .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    transform: skewX(-45deg);
+    transition: all 0.5s ease;
+    z-index: -1;
+}
+
+.d-flex .btn:hover::before {
+    left: 100%;
+}
+
+
+.carousel-wrapper {
+      background-color: #1e1e2f;
+      padding: 50px 0;
+}
+.carousel-inner img {
+      border-radius: 10px;
+      object-fit: cover;
+}
+.carousel-indicators button {
+      background-color: #29b6f6;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}
+.blog-section {
+    padding: 50px 0;
+}
+.blog-card {
+    background-color: #1e1e2f;
+    border: 1px solid #29b6f6;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.blog-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 255, 204, 0.7);
+}
+.blog-card h5 {
+    color: #29b6f6;
+}
+.blog-card p {
+    color: #ffffff;
+}
+.btn-read-more {
+    background-color: #29b6f6;
+    color: #000;
+    border: none;
+}
+.btn-read-more:hover {
+    background-color: #29b6f6;
+    color: #1e1e2f;
+}
+.blog-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 1px solid #29b6f6;
+    margin-bottom: 15px;
+}
+
+/* Animation for cards */
+.animated-card {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px; /* Optional for smoother edges */
+  }
+
+.animated-card:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 8px 25px rgba(41, 182, 246, 0.9); /* Brighter shadow */
+  }
+
+/* Base Card Styling */
+.techy-card {
+    border: 2px solid transparent;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Hover Animation */
+  .techy-card:hover {
+    border-color: #29b6f6;
+    box-shadow: 0 8px 20px rgba(41, 182, 246, 0.9), 0 0 20px #29b6f6;
+    transform: translateY(-10px);
+  }
+
+  /* Image Zoom Effect */
+  .card-img-container {
+    overflow: hidden;
+    border-bottom: 3px solid #29b6f6;
+  }
+
+  .card-img-container img {
+    transition: transform 0.4s ease;
+    width: 100%;
+  }
+
+  .techy-card:hover .card-img-container img {
+    transform: scale(1.1);
+  }
+
+  /* Title Glow Effect */
+  .techy-card .card-title {
+    text-shadow: 0 0 8px #29b6f6, 0 0 12px #00ffcc;
+  }
+
+  /* Text Color */
+  .techy-card .card-text {
+    color: #cccccc;
+  }
+
+  /* .scroll-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .scroll-content {
+    display: flex;
+    animation: scroll-left 15s linear infinite;
+  } */
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .techy-card {
+    background-color: #1e293b;
+    color: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    width: 250px; /* Medium size width */
+    height: 350px; /* Medium size height */
+    margin: 0 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+  }
+
+  .techy-card:hover {
+    border-color: #29b6f6;
+    box-shadow: 0 8px 20px rgba(41, 182, 246, 0.9), 0 0 20px #29b6f6;
+    transform: translateY(-10px);
+  }
+
+  .card-img-container img {
+    width: 100%;
+    height: 200px; /* Adjust for medium size */
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .techy-card:hover .card-img-container img {
+    transform: scale(1.1);
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-family: cursive, sans-serif;
+    color: #29b6f6;
+    text-shadow: 0 0 8px #29b6f6, 0 0 12px #00ffcc;
+  }
+
+  .card-text {
+    font-size: 14px;
+    color: #cccccc;
+  }
+#services .service-card {
+  background-color: #1e1e2f;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#services .service-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 255, 204, 0.7);
+}
+
+#services .service-card .icon {
+  font-size: 50px;
+  color: #29b6f6;
+  margin-bottom: 20px;
+}
+
+#services .service-card h3 {
+  font-family: cursive, sans-serif;
+  font-size: 22px;
+  color: #29b6f6;
+  margin-bottom: 15px;
+}
+
+#services .service-card p {
+  font-size: 16px;
+  color: #cccccc;
+}
+
+@media (max-width: 768px) {
+  #services .service-card {
+    margin-top: 20px;
+  }
+}
+
+footer{
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  background: #000;
+}
+footer .content{
+  max-width: 1350px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+footer .content p,a{
+  color: #fff;
+}
+footer .content .box{
+  width: 33%;
+  transition: all 0.4s ease;
+}
+footer .content .topic{
+  font-size: 22px;
+  font-weight: 600;
+  color: #29b6f6;
+  margin-bottom: 16px;
+}
+footer .content p{
+  text-align: justify;
+}
+footer .content .lower .topic{
+  margin: 24px 0 5px 0;
+}
+footer .content .lower i{
+  padding-right: 16px;
+}
+footer .content .middle{
+  padding-left: 80px;
+}
+footer .content .middle a{
+  line-height: 32px;
+}
+footer .content .right input[type="text"]{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  color: #d9d9d9;
+  background: #000;
+  border-radius: 5px;
+  padding-left: 10px;
+  font-size: 17px;
+  border: 2px solid #222;
+}
+footer .content .right input[type="submit"]{
+  height: 42px;
+  width: 100%;
+  font-size: 18px;
+  color: #fff;
+  background: #000;
+  outline: none;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 12px;
+  border: 2px solid #29b6f6;
+  transition: all 0.3s ease-in-out;
+}
+.content .right input[type="submit"]:hover{
+  background: none;
+  color:  #29b6f6;
+}
+.icons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  
+}
+.icons a{
+  margin: 0 25px;
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+.icons a .layer{
+  width: 55px;
+  height: 55px;
+  transition: transform 0.3s;
+}
+.icons a:hover .layer{
+  transform: rotate(-35deg) skew(20deg);
+}
+.icons a .layer span{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.icons a .layer span.fab{
+  font-size: 30px;
+  line-height: 55px;
+  text-align: center;
+}
+.icons a:hover .layer span:nth-child(1){
+  opacity: 0.2;
+}
+.icons a:hover .layer span:nth-child(2){
+  opacity: 0.4;
+  transform: translate(5px, -5px);
+}
+.icons a:hover .layer span:nth-child(3){
+  opacity: 0.6;
+  transform: translate(10px, -10px);
+}
+.icons a:hover .layer span:nth-child(4){
+  opacity: 0.8;
+  transform: translate(15px, -15px);
+}
+.icons a:hover .layer span:nth-child(5){
+  opacity: 1;
+  transform: translate(20px, -20px);
+}
+.icons a:nth-child(1) .layer span,
+.icons a:nth-child(1) .text{
+  color: #4267B2;
+  border-color: #4267B2;
+}
+.icons a:nth-child(2) .layer span,
+.icons a:nth-child(2) .text{
+  color: #1DA1F2;
+  border-color: #1DA1F2;
+}
+.icons a:nth-child(3) .layer span,
+.icons a:nth-child(3) .text{
+  color: #E1306C;
+  border-color: #E1306C;
+}
+.icons a:nth-child(4) .layer span,
+.icons a:nth-child(4) .text{
+  color: #2867B2;
+  border-color: #2867B2;
+}
+.icons a:nth-child(5) .layer span,
+.icons a:nth-child(5) .text{
+  color: #ff0000;
+  border-color: #ff0000;
+}
+.icons a:hover:nth-child(1) .layer span{
+  box-shadow: -1px 1px 3px #4267B2;
+}
+.icons a:hover:nth-child(2) .layer span{
+  box-shadow: -1px 1px 3px #1DA1F2;
+}
+.icons a:hover:nth-child(3) .layer span{
+  box-shadow: -1px 1px 3px #E1306C;
+}
+.icons a:hover:nth-child(4) .layer span{
+  box-shadow: -1px 1px 3px #2867B2;
+}
+.icons a:hover:nth-child(5) .layer span{
+  box-shadow: -1px 1px 3px #ff0000;
+}
+.icons a .text{
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  opacity: 0;
+  font-weight: 500;
+  transform: translateX(-50%);
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+}
+.icons a:hover .text{
+  bottom: -35px;
+  opacity: 1;
+}
+footer .bottom{
+  width: 100%;
+  text-align: center;
+  color: #d9d9d9;
+  padding: 0 40px 5px 0;
+}
+footer .bottom a{
+  color: #29b6f6;
+}
+footer a{
+  transition: all 0.3s ease;
+}
+footer a:hover{
+  color: #29b6f6;
+}
+@media (max-width:1100px) {
+  footer .content .middle{
+    padding-left: 50px;
+  }
+}
+@media (max-width:950px){
+  footer .content .box{
+    width: 50%;
+  }
+  .content .right{
+    margin-top: 40px;
+  }
+}
+@media (max-width:560px){
+  footer{
+    position: relative;
+  }
+  footer .content .box{
+    width: 100%;
+    margin-top: 30px;
+  }
+  footer .content .middle{
+    padding-left: 0;
+  }
+}
+
+</style>
+<body>
+  <section>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm" style="background: #000; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);">
+      <div class="container-fluid d-flex align-items-center justify-content-between">
+        <!-- Logo or Title -->
+        <span class="navbar-brand" style="font-family: cursive, sans-serif; color: #29b6f6; text-shadow: 0 0 8px #29b6f6, 0 0 12px #00b3cc;">
+          <img src="{% static 'images/logotdb.png' %}" alt="Logo TDB" height="80px">
+        </span>
+    
+        <!-- Navbar Links with Hover Animation -->
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li class="forward"><a href="/blogpage">Blogs</a></li>
+          <li class="center"><a href="#">About</a></li>
+          <li class="upward"><a href="#">Contact</a></li>
+          <li class="forward"><a href='/givemeuserlogin'>Online Quiz</a></li>
+          
+        </ul>
+    
+        <!-- Search Box -->
+        <form class="d-flex search-form" role="search">
+          <input class="form-control search-input me-2" type="search" placeholder="Search Here" aria-label="Search">
+          <button class="btn search-btn" type="submit">Search</button>
+        </form>
+
+        <!-- Login and Sign Up Buttons -->
+        <div class="d-flex button-container">
+          <button class="btn login-btn me-2"><a href="/givemelogin">Login</a></button>
+          <button class="btn signup-btn"><a href="/givemeregister">Sign Up</a></button>
+        </div>
+
+    </nav>
+  </section>
+  <section>
+    <div class="carousel-wrapper">
+      <div id="demo" class="carousel slide mx-auto" da ta-bs-ride="carousel" data-bs-interval="5000" style="width: 80%; position: relative;">
+        
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        </div>
+  
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'images/1.png' %}" alt="Python" class="d-block w-100">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/2.png' %}" alt="Django" class="d-block w-100">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/3.png' %}" alt="HTML" class="d-block w-100">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/4.png' %}" alt="CSS" class="d-block w-100">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/5.png' %}" alt="Angular" class="d-block w-100">
+          </div>
+        </div>
+  
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Bootstrap JS and Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+  
+
+  <section style="padding: 40px 0; background: #1e1e2f;">
+    <h1 style="
+        text-align: center; 
+        font-family: cursive, sans-serif; 
+        color: #29b6f6; 
+        text-shadow: 0 0 8px #29b6f6, 0 0 12px #00b3cc; 
+        margin-bottom: 30px;">
+      Featured Posts
+    </h1>
+    <div class="container">
+      <div class="row g-4">
+        <!-- Python Card -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card animated-card" style="background-color: #1e293b; border: none;">
+            <img src="{% static 'images/python1.png' %}" class="card-img-top" alt="Python" 
+              style="border-bottom: 3px solid #29b6f6;">
+            <div class="card-body">
+              <h4 class="card-title" style="color: #29b6f6; font-family: cursive, sans-serif;">Introduction to Python</h4>
+              <p class="card-text" style="color: #cccccc;">
+                Master the basics of Python, the versatile and beginner-friendly programming lang.
+              </p>
+              <a href="#" class="btn" 
+                style="background-color: #29b6f6; color: #000; font-family: cursive, sans-serif; box-shadow: 0 0 8px #29b6f6;">Learn More</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Django Card -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card animated-card" style="background-color: #1e293b; border: none;">
+            <img src="{% static 'images/django1.png' %}" class="card-img-top" alt="Django" 
+              style="border-bottom: 3px solid #29b6f6;">
+            <div class="card-body">
+              <h4 class="card-title" style="color: #29b6f6; font-family: cursive, sans-serif;">Introduction To Django</h4>
+              <p class="card-text" style="color: #cccccc;">
+                Learn to build dynamic web applications with Django, a powerful Python framework.
+              </p>
+              <a href="#" class="btn" 
+                style="background-color: #29b6f6; color: #000; font-family: cursive, sans-serif; box-shadow: 0 0 8px #29b6f6;">Learn More</a>
+            </div>
+          </div>
+        </div>
+        <!-- HTML CSS Card -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card animated-card" style="background-color: #1e293b; border: none;">
+            <img src="{% static 'images/html1.png' %}" class="card-img-top" alt="Web" 
+              style="border-bottom: 3px solid #29b6f6;">
+            <div class="card-body">
+              <h4 class="card-title" style="color: #29b6f6; font-family: cursive, sans-serif;">Intro To HTML & CSS </h4>
+              <p class="card-text" style="color: #cccccc;">
+                Discover the building blocks of web development with HTML and CSS Blogs.
+              </p>
+              <a href="#" class="btn" 
+                style="background-color: #29b6f6; color: #000; font-family: cursive, sans-serif; box-shadow: 0 0 8px #29b6f6;">Learn More</a>
+            </div>
+          </div>
+        </div>
+        <!-- GIT Card -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card animated-card" style="background-color: #1e293b; border: none;">
+            <img src="{% static 'images/git1.png' %}" class="card-img-top" alt="git" 
+              style="border-bottom: 3px solid #29b6f6;">
+            <div class="card-body">
+              <h4 class="card-title" style="color: #29b6f6; font-family: cursive, sans-serif;">Introduction To GIT</h4>
+              <p class="card-text" style="color: #cccccc;">
+                Dive into version control and collaborative coding with Git and GitHub.
+              </p>
+              <a href="#" class="btn" 
+                style="background-color: #29b6f6; color: #000; font-family: cursive, sans-serif; box-shadow: 0 0 8px #29b6f6;">Learn More</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Additional Cards (HTML & Git) will follow similar structure -->
+  
+      </div>
+    </div>
+  </section>
+  </section>
+  <section class="d-flex flex-column align-items-center" style="padding: 50px; background-color: #1e1e2f; overflow: hidden;">
+    <h1 style="
+        text-align: center; 
+        font-family: cursive, sans-serif; 
+        color: #29b6f6; 
+        text-shadow: 0 0 8px #29b6f6, 0 0 12px #00b3cc; 
+        margin-bottom: 30px;">
+      Meet Our Team
+    </h1>
+    <div class="scroll-container">
+      <div class="scroll-content d-flex">
+        <!-- Team Member 1 -->
+        <div class="card techy-card">
+          <div class="card-img-container">
+            <img src="{% static 'images/p1.png' %}" class="card-img-top" alt="Team Member">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Atul Seth</h5>
+            <p class="card-text">Project Manager</p>
+          </div>
+        </div>
+        <!-- Team Member 2 -->
+        <div class="card techy-card">
+          <div class="card-img-container">
+            <img src="{% static 'images/p2.png' %}" class="card-img-top" alt="Team Member">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Jenna Gill</h5>
+            <p class="card-text">Lead Developer</p>
+          </div>
+        </div>
+        <!-- Team Member 3 -->
+        <div class="card techy-card">
+          <div class="card-img-container">
+            <img src="{% static 'images/p3.png' %}" class="card-img-top" alt="Team Member">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Samrat Singh</h5>
+            <p class="card-text">UI/UX Designer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="blog-section" style="background-color: #1e1e2f;">
+    <div class="container">
+      <h1 style="
+        text-align: center; 
+        font-family: cursive, sans-serif; 
+        color: #29b6f6; 
+        text-shadow: 0 0 8px #29b6f6, 0 0 12px #00b3cc; 
+        margin-bottom: 30px;">
+      Blogs By Category
+    </h1>
+      <div class="row g-4">
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="blog-card p-3 text-center">
+            <img src="{% static 'images/python.png' %}" alt="Python">
+            <h5>Python</h5>
+            <p>All Python related blogs</p>
+            <button class="btn btn-read-more">Explore Now</button>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="blog-card p-3 text-center">
+            <img src="{% static 'images/django.png' %}" alt="Django">
+            <h5>Django</h5>
+            <p>All Django related blogs</p>
+            <button class="btn btn-read-more">Explore Now</button>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="blog-card p-3 text-center">
+            <img src="{% static 'images/web.png' %}" alt="Web Development">
+            <h5>Web Dev</h5>
+            <p>All Web-Dev related blogs</p>
+            <button class="btn btn-read-more">Explore Now</button>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="blog-card p-3 text-center">
+            <img src="{% static 'images/anguler.png' %}" alt="Anguler">
+            <h5>Anguler</h5>
+            <p>All Anguler related blogs</p>
+            <button class="btn btn-read-more">Explore Now</button>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="blog-card p-3 text-center">
+            <img src="{% static 'images/ML.png' %}" alt="Git">
+            <h5>ML</h5>
+            <p>All Machine Learning related blogs</p>
+            <button class="btn btn-read-more">Explore Now</button>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="blog-card p-3 text-center">
+            <img src="{% static 'images/git.png' %}" alt="Git">
+            <h5>GIT & GITHUB</h5>
+            <p>Git and Github related blogs</p>
+            <button class="btn btn-read-more"> Explore Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+  <section>
+    <section id="services" style="padding: 60px 0; background: #1e1e2f;">
+      <div class="container">
+        <h1 style="
+        text-align: center; 
+        font-family: cursive, sans-serif; 
+        color: #29b6f6; 
+        text-shadow: 0 0 8px #29b6f6, 0 0 12px #00b3cc; 
+        margin-bottom: 30px;">
+      Services We Offer
+    </h1>
+        <div class="row g-4">
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="service-card">
+              <div class="icon">
+                <i class="fas fa-laptop-code"></i>
+              </div>
+              <h3>Web Development</h3>
+              <p>Create responsive, dynamic, and user-friendly websites tailored to your needs.</p>
+            </div>
+          </div>
+          <!-- <div class="col-12 col-md-6 col-lg-4">
+            <div class="service-card">
+              <div class="icon">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <h3>Mobile App Development</h3>
+              <p>Design and develop high-performance apps for Android and iOS platforms.</p>
+            </div>
+          </div> -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="service-card">
+              <div class="icon">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <h3>Machine Learning</h3>
+              <p>We work on differant Machine Learning Projects according to requirements</p>
+            </div>
+          </div>
+          <!-- <div class="col-12 col-md-6 col-lg-4">
+            <div class="service-card">
+              <div class="icon">
+                <i class="fas fa-cloud"></i>
+              </div>
+              <h3>Cloud Solutions</h3>
+              <p>Deploy scalable cloud-based applications and manage cloud infrastructure.</p>
+            </div>
+          </div> -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="service-card">
+              <div class="icon">
+                <i class="fas fa-database"></i>
+              </div>
+              <h3>Data Analytics</h3>
+              <p>Analyze and visualize data to extract actionable insights for your business.</p>
+            </div>
+          </div>
+          <!-- <div class="col-12 col-md-6 col-lg-4">
+            <div class="service-card">
+              <div class="icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h3>Cybersecurity</h3>
+              <p>Secure your digital assets with comprehensive security solutions.</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+    
+  </section>
+  <section>
+    <footer>
+      <br>
+      <br>
+      <br>
+      <div class="topic" style="text-align: center;"><h2>Follow Us On:</h2></div>
+      <br>
+      <div class="icons" style="text-align: center;">
+        <a href="#">
+           <div class="layer">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span class="fab fa-facebook-f"></span>
+           </div>
+           <div class="text">
+              Facebook
+           </div>
+        </a>
+        <a href="#">
+           <div class="layer">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span class="fab fa-twitter"></span>
+           </div>
+           <div class="text">
+              Twitter
+           </div>
+        </a>
+        <a href="#">
+           <div class="layer">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span class="fab fa-instagram"></span>
+           </div>
+           <div class="text">
+              Instagram
+           </div>
+        </a>
+        <a href="#">
+           <div class="layer">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span class="fab fa-linkedin-in"></span>
+           </div>
+           <div class="text">
+              Linkedin
+           </div>
+        </a>
+        <a href="#">
+           <div class="layer">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span class="fab fa-youtube"></span>
+           </div>
+           <div class="text">
+              YouTube
+           </div>
+        </a>
+     </div>
+     <br><br><br>
+      <div class="content">
+        <div class="left box">
+          <div class="upper">
+            <div class="topic">About us</div>
+            <p>Welcome to our platform! We are dedicated to providing the best experience for our users. Our team works tirelessly to create solutions that cater to your needs and deliver exceptional value.</p>
+          </div>
+          <div class="lower">
+            <div class="topic">Contact us</div>
+            <div class="phone">
+              <a href="#"><i class="fas fa-phone-volume"></i>+91 9561058903</a>
+            </div>
+            <div class="email">
+              <a href="#"><i class="fas fa-envelope"></i>amolnikam9561@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="middle box">
+          <div class="topic">Our Services</div>
+          <div><a href="#">Web Design, Development</a></div>
+          <div><a href="#">Data Analytics</a></div>
+          <div><a href="#">Business Intelligance</a></div>
+          <div><a href="#">Full Stack Web Development</a></div>
+        </div>
+        <div class="right box">
+          <div class="topic">Subscribe us</div>
+          <form action="#">
+            <input type="text" placeholder="Enter email address">
+            <input type="submit" name="" value="Send">
+            <br><br>
+          </form>
+        </div>
+      </div>
+      <br><br><br>
+      <div class="bottom">
+        <p>Copyright © 2025 <a href="#">The DebuggersJ ournal</a> All rights reserved</p>
+      </div>
+    </footer>
+  </section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-glznVEuLYayTqUByqC2VAInKKOuKgDbtk/sYUC/D60qap888t4Djt9EOjHfVz" crossorigin="anonymous"></script>
+</body>
+</html>
